@@ -1,0 +1,1 @@
+﻿insert into Clientes (id,nome,status_id) values (5,'Teste',1);
