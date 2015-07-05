@@ -1,4 +1,4 @@
-﻿namespace WebApplication.Dao.Interfaces.Crud
+﻿namespace WebApplication.Models.Interfaces.Crud
 {
     public interface IInserir<in T> where T : class
     {

@@ -56,12 +56,12 @@ namespace WebApplication.Dao
             throw new NotImplementedException();
         }
 
-        public int Inserir(ICliente model)
+        public bool Inativar(ICliente model)
         {
             throw new NotImplementedException();
         }
 
-        public bool Excluir(ICliente model)
+        public int Inserir(ICliente model)
         {
             throw new NotImplementedException();
         }

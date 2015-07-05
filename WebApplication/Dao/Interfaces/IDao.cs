@@ -1,9 +1,9 @@
-﻿using WebApplication.Dao.Interfaces.Crud;
+﻿using WebApplication.Models.Interfaces.Crud;
 using WebApplication.Models.Interfaces;
 
 namespace WebApplication.Dao.Interfaces
 {
-    public interface IDao<T> : IAlterar<T>, IConsultar<T>, IInserir<T>, IInativar<T> where T : class, IClasseBase
+    public interface IDao<T> : IAlterar<T>, IConsultar<T>, IInativar<T>, IInserir<T> where T : class, IClasseBase
     {
     }
 }

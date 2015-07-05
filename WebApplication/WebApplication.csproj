@@ -126,10 +126,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Dao\DaoCliente.cs" />
     <Compile Include="Dao\DaoUnidade.cs" />
-    <Compile Include="Dao\Interfaces\Crud\IAlterar.cs" />
-    <Compile Include="Dao\Interfaces\Crud\IConsultar.cs" />
-    <Compile Include="Dao\Interfaces\Crud\IInativar.cs" />
-    <Compile Include="Dao\Interfaces\Crud\IInserir.cs" />
+    <Compile Include="Models\Interfaces\Crud\IAlterar.cs" />
+    <Compile Include="Models\Interfaces\Crud\IConsultar.cs" />
+    <Compile Include="Models\Interfaces\Crud\IInativar.cs" />
+    <Compile Include="Models\Interfaces\Crud\IInserir.cs" />
     <Compile Include="Dao\Interfaces\IDaoCliente.cs" />
     <Compile Include="Dao\Interfaces\IDao.cs" />
     <Compile Include="Dao\Interfaces\IDaoUnidade.cs" />

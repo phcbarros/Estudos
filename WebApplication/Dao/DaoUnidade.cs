@@ -59,12 +59,12 @@ namespace WebApplication.Dao
             throw new NotImplementedException();
         }
 
-        public int Inserir(IUnidade model)
+        public bool Inativar(IUnidade model)
         {
             throw new NotImplementedException();
         }
 
-        public bool Excluir(IUnidade model)
+        public int Inserir(IUnidade model)
         {
             throw new NotImplementedException();
         }
