@@ -12,7 +12,7 @@ namespace WebApplication.Tests.Models
         [TestFixtureSetUp]
         public void SetUp()
         {
-            this.Cliente = new Cliente();
+            this.Cliente = new Cliente(1);
         }
 
         [Test]
@@ -21,6 +21,14 @@ namespace WebApplication.Tests.Models
             var clientes = this.Cliente.Listar();
             Assert.IsNotNull(clientes);
             Assert.IsTrue(clientes.Count > 0);
+        }
+
+        [Test]
+        public void PossuiUnidades()
+        {
+            this.Cliente.PreencherUnidades();
+            Assert.IsNotNull(this.Cliente.Unidades);
+            Assert.IsTrue(this.Cliente.Unidades.Count > 0);
         }
     }
 }

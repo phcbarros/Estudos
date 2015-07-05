@@ -13,11 +13,9 @@ namespace WebApplication.Models
     {
         public string Nome { get; private set; }
         public IList<IUnidade> Unidades { get; private set; }
-
-        private static IDaoCliente DaoCliente = new DaoCliente();
-        public Cliente()
+        public Cliente(int id)
         {
-
+            this.Id = id;
         }
         public Cliente(int id, string nome, Status status)
         {
@@ -27,11 +25,13 @@ namespace WebApplication.Models
         }
         public IList<ICliente> Listar()
         {
-            return DaoCliente.Listar();
+            IDaoCliente daoCliente = new DaoCliente();
+            return daoCliente.Listar();
         }
         public void PreencherUnidades()
         {
-            throw new NotImplementedException();
+            IUnidade unidade = new Unidade();
+            this.Unidades = unidade.Listar(this);
         }
     }
 }

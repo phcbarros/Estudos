@@ -6,6 +6,6 @@ namespace WebApplication.Models.Interfaces
     {
         string Nome { get; }
         ICliente Cliente { get; }
-        IList<IUnidade> Unidades (ICliente model);
+        IList<IUnidade> Listar (ICliente model);
     }
 }

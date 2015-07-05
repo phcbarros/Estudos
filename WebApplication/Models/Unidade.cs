@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApplication.Dao;
+using WebApplication.Dao.Interfaces;
 using WebApplication.Models.Enums;
 using WebApplication.Models.Interfaces;
 
@@ -21,9 +23,10 @@ namespace WebApplication.Models
             this.Nome = nome;
             this.Status = status;
         }
-        public IList<IUnidade> Unidades(ICliente model)
+        public IList<IUnidade> Listar(ICliente model)
         {
-            throw new NotImplementedException();
+            IDaoUnidade daoUnidade = new DaoUnidade();
+            return daoUnidade.Listar(model);
         }
     }
 }
