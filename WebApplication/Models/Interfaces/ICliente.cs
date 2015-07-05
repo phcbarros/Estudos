@@ -6,5 +6,7 @@ namespace WebApplication.Models.Interfaces
     {
         string Nome { get; }
         IList<IUnidade> Unidades { get; }
+        IList<ICliente> Listar();
+        void PreencherUnidades();
     }
 }

@@ -133,6 +133,8 @@
     <Compile Include="Dao\Interfaces\IDaoCliente.cs" />
     <Compile Include="Dao\Interfaces\IDao.cs" />
     <Compile Include="Dao\Interfaces\IDaoUnidade.cs" />
+    <Compile Include="Dao\Tabelas\TblClientes.cs" />
+    <Compile Include="Dao\Tabelas\TblUnidades.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -1,8 +1,11 @@
-﻿namespace WebApplication.Models.Interfaces
+﻿using System.Collections.Generic;
+
+namespace WebApplication.Models.Interfaces
 {
     public interface IUnidade : IClasseBase
     {
         string Nome { get; }
         ICliente Cliente { get; }
+        IList<IUnidade> Unidades (ICliente model);
     }
 }
