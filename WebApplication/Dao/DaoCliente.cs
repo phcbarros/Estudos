@@ -75,12 +75,11 @@ namespace WebApplication.Dao
             {
                 try
                 {
-                    //dal.CriarParametro("id", SqlDbType.Int, model.Id);
                     dal.CriarParametro("nome", SqlDbType.Char, model.Nome);
                     dal.CriarParametro("status_id", SqlDbType.SmallInt, model.Status.GetHashCode());
 
                     dal.ExecuteNonQuery(sql.ToString());
-                    retorno = 10;// Convert.ToInt32(dal.UltimoIdInserido);
+                    retorno = Convert.ToInt32(dal.UltimoIdInserido);
                 }
                 catch (SqlException) { throw new MyException("Operação não realizada, por favor, tente novamente!"); }
             }

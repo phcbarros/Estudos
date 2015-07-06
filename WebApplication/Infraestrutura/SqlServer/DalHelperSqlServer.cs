@@ -10,14 +10,14 @@ namespace WebApplication.Infraestrutura.SqlServer
     {
         private SqlConnection Conexao { get; set; }
         private ICollection<SqlParameter> Parametros { get; set; }
+        public int UltimoIdInserido { get; private set; }
         public DalHelperSqlServer()
         {
             Conexao = ConexaoSqlServer.GetConnection();
         }
-        public void CriarParametro(string nome, SqlDbType tipo, object valor, ParameterDirection direction = ParameterDirection.Input)
+        public void CriarParametro(string nome, SqlDbType tipo, object valor)
         {
             var parametro = new SqlParameter(nome, tipo);
-            parametro.Direction = direction;
 
             if (valor == null)
             {
@@ -55,6 +55,7 @@ namespace WebApplication.Infraestrutura.SqlServer
                     {
                         retorno = comando.ExecuteNonQuery();
                         transacao.Commit();
+                        UltimoIdInserido = Convert.ToInt32(this.ExecuteScalar("SELECT SCOPE_IDENTITY() AS LastInsertedId;"));
                     }
                     catch (SqlException exception)
                     {
