@@ -10,8 +10,6 @@ namespace WebApplication.Infraestrutura.SqlServer
     {
         private SqlConnection Conexao { get; set; }
         private ICollection<SqlParameter> Parametros { get; set; }
-        public int UltimoIdInserido { get; private set; }
-
         public DalHelperSqlServer()
         {
             Conexao = ConexaoSqlServer.GetConnection();

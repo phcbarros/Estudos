@@ -1,6 +1,9 @@
 ﻿using System;
 using NUnit.Framework;
+using WebApplication.Dao;
+using WebApplication.Dao.Interfaces;
 using WebApplication.Models;
+using WebApplication.Models.Interfaces;
 
 namespace WebApplication.Tests.Models
 {
@@ -29,6 +32,15 @@ namespace WebApplication.Tests.Models
             this.Cliente.PreencherUnidades();
             Assert.IsNotNull(this.Cliente.Unidades);
             Assert.IsTrue(this.Cliente.Unidades.Count > 0);
+        }
+
+        [Test]
+        public void Cadastrar()
+        {
+            ICliente cliente = new Cliente("Jessé " + DateTime.Now);
+            cliente.Inserir();
+
+            Assert.AreNotEqual(0, cliente.Id);
         }
     }
 }

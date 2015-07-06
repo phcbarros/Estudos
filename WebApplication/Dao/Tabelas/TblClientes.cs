@@ -13,9 +13,9 @@ namespace WebApplication.Dao.Tabelas
         public string NomeTabela { get; private set; }
         public TblClientes()
         {
-            this.Id = "clientes.id";
-            this.Nome = "clientes.nome";
-            this.Status_Id = "clientes.status_id";
+            this.Id = "id";
+            this.Nome = "nome";
+            this.Status_Id = "status_id";
             this.NomeTabela = "clientes";
         }
     }

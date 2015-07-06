@@ -8,5 +8,9 @@ namespace WebApplication.Models.Interfaces
         IList<IUnidade> Unidades { get; }
         IList<ICliente> Listar();
         void PreencherUnidades();
+        bool Alterar();
+        ICliente Consultar(int id);
+        bool Inativar();
+        void Inserir();
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace WebApplication.Models.Interfaces.Crud
+﻿namespace WebApplication.Dao.Interfaces.Crud
 {
     public interface IAlterar<in T> where T : class
     {

@@ -5,6 +5,7 @@ using System.Web;
 using WebApplication.Dao;
 using WebApplication.Dao.Interfaces;
 using WebApplication.Models.Enums;
+using WebApplication.Models.Exceptions;
 using WebApplication.Models.Interfaces;
 
 namespace WebApplication.Models
@@ -25,8 +26,31 @@ namespace WebApplication.Models
         }
         public IList<IUnidade> Listar(ICliente model)
         {
+            if (model == null || model.Id <= 0)
+                throw new MyException("Id é obrigatório!");
+
             IDaoUnidade daoUnidade = new DaoUnidade();
             return daoUnidade.Listar(model);
+        }
+
+        public bool Alterar()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IUnidade Consultar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Inativar()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Inserir()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 using WebApplication.Dao.Interfaces;
@@ -63,7 +64,28 @@ namespace WebApplication.Dao
 
         public int Inserir(ICliente model)
         {
-            throw new NotImplementedException();
+            int retorno;
+            var sql = new StringBuilder();
+            var tabela = new TblClientes();
+
+            sql.AppendFormat(" INSERT INTO {0} ({1},{2})", tabela.NomeTabela, tabela.Nome, tabela.Status_Id);
+            sql.Append(" VALUES (@nome,@status_id);");
+            
+            using (var dal = new DalHelperSqlServer())
+            {
+                try
+                {
+                    //dal.CriarParametro("id", SqlDbType.Int, model.Id);
+                    dal.CriarParametro("nome", SqlDbType.Char, model.Nome);
+                    dal.CriarParametro("status_id", SqlDbType.SmallInt, model.Status.GetHashCode());
+
+                    dal.ExecuteNonQuery(sql.ToString());
+                    retorno = 10;// Convert.ToInt32(dal.UltimoIdInserido);
+                }
+                catch (SqlException) { throw new MyException("Operação não realizada, por favor, tente novamente!"); }
+            }
+
+            return retorno;
         }
     }
 }

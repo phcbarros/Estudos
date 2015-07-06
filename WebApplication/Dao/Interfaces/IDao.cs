@@ -1,4 +1,4 @@
-﻿using WebApplication.Models.Interfaces.Crud;
+﻿using WebApplication.Dao.Interfaces.Crud;
 using WebApplication.Models.Interfaces;
 
 namespace WebApplication.Dao.Interfaces

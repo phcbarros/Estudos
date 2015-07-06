@@ -14,10 +14,10 @@ namespace WebApplication.Dao.Tabelas
         public string NomeTabela { get; private set; }
         public TblUnidades()
         {
-            this.Id = "unidades.id";
-            this.Nome = "unidades.nome";
-            this.Clientes_Id = "unidades.clientes_id";
-            this.Status_Id = "unidades.status_id";
+            this.Id = "id";
+            this.Nome = "nome";
+            this.Clientes_Id = "clientes_id";
+            this.Status_Id = "status_id";
             this.NomeTabela = "unidades";
         }
     }

@@ -6,6 +6,10 @@ namespace WebApplication.Models.Interfaces
     {
         string Nome { get; }
         ICliente Cliente { get; }
-        IList<IUnidade> Listar (ICliente model);
+        IList<IUnidade> Listar(ICliente model);
+        bool Alterar();
+        IUnidade Consultar(int id);
+        bool Inativar();
+        void Inserir();
     }
 }
