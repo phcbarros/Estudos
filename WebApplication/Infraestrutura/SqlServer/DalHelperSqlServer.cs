@@ -55,7 +55,7 @@ namespace WebApplication.Infraestrutura.SqlServer
                     {
                         retorno = comando.ExecuteNonQuery();
                         transacao.Commit();
-                        UltimoIdInserido = Convert.ToInt32(this.ExecuteScalar("SELECT SCOPE_IDENTITY() AS LastInsertedId;"));
+                        //UltimoIdInserido = Convert.ToInt32(this.ExecuteScalar("SELECT SCOPE_IDENTITY() AS LastInsertedId;"));
                     }
                     catch (SqlException exception)
                     {
