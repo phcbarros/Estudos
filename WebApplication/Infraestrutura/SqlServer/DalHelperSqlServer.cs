@@ -6,7 +6,7 @@ using WebGrease.Css.Extensions;
 
 namespace WebApplication.Infraestrutura.SqlServer
 {
-    public class DalHelperSqlServer : IDisposable
+    public sealed class DalHelperSqlServer : IDisposable
     {
         private SqlConnection Conexao { get; set; }
         private ICollection<SqlParameter> Parametros { get; set; }
@@ -47,6 +47,10 @@ namespace WebApplication.Infraestrutura.SqlServer
             int retorno;
             using (var comando = CriarComando(sql))
             {
+                //var p = new SqlParameter("id", DBNull.Value);
+                //p.Direction = ParameterDirection.Output;
+                //comando.Parameters.Add(p);
+
                 comando.Connection.Open();
                 using (var transacao = Conexao.BeginTransaction(IsolationLevel.Serializable))
                 {

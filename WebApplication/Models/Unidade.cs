@@ -24,10 +24,10 @@ namespace WebApplication.Models
             this.Nome = nome;
             this.Status = status;
         }
+        /// <exception cref="MyException"></exception>
         public IList<IUnidade> Listar(ICliente model)
         {
-            if (model == null || model.Id <= 0)
-                throw new MyException("Id é obrigatório!");
+            base.ValidarModelo();
 
             IDaoUnidade daoUnidade = new DaoUnidade();
             return daoUnidade.Listar(model);

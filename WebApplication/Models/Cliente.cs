@@ -57,18 +57,27 @@ namespace WebApplication.Models
         /// <exception cref="MyException"></exception>
         public void Inserir()
         {
-            if (string.IsNullOrEmpty(Nome))
-                throw new MyException("Nome é obrigatório!");
-
-            //Criar Validação de Já Existente
-            //Dividir em métodos
-
-            this.Status = Status.Ativo;
+            ValidarNome();
 
             IDaoCliente daoCliente = new DaoCliente();
+
+            //if (daoCliente.ExisteNomenclaturaInformada(this))
+            //    throw new MyException("Já existe o Nome informado!");
+
+            this.Status = Status.Ativo;          
             this.Id = daoCliente.Inserir(this);
 
             //Criar Log por tabela
         }
+
+        #region Validações
+        /// <exception cref="MyException"></exception>
+        private void ValidarNome()
+        {
+            if (string.IsNullOrEmpty(this.Nome))
+                throw new MyException("Nome é obrigatório!");
+        }
+        #endregion
+
     }
 }

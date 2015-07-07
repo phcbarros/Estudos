@@ -1,4 +1,5 @@
-﻿using WebApplication.Models.Enums;
+﻿using System;
+using WebApplication.Models.Enums;
 
 namespace WebApplication.Models.Interfaces
 {

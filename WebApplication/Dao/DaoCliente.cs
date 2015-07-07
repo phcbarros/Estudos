@@ -13,7 +13,7 @@ using WebApplication.Models.Interfaces;
 
 namespace WebApplication.Dao
 {
-    public class DaoCliente : IDaoCliente
+    public sealed class DaoCliente : IDaoCliente
     {
         public IList<ICliente> Listar()
         {
