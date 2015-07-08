@@ -2,7 +2,7 @@
 
 namespace WebApplication.Models.Interfaces
 {
-    public interface ICliente : IClasseBase
+    public interface ICliente : IModel
     {
         string Nome { get; }
         IList<IUnidade> Unidades { get; }

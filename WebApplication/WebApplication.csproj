@@ -135,6 +135,7 @@
     <Compile Include="Dao\Interfaces\IDaoUnidade.cs" />
     <Compile Include="Dao\Interfaces\Logs\IDaoClienteLog.cs" />
     <Compile Include="Dao\Interfaces\Logs\IDaoUnidadeLog.cs" />
+    <Compile Include="Dao\Interfaces\Crud\IInserirPartial.cs" />
     <Compile Include="Dao\Tabelas\TblClientes.cs" />
     <Compile Include="Dao\Tabelas\TblUnidades.cs" />
     <Compile Include="Global.asax.cs">
@@ -146,9 +147,12 @@
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Enums\Status.cs" />
     <Compile Include="Models\Exceptions\MyException.cs" />
+    <Compile Include="Models\Interfaces\IIdentity.cs" />
+    <Compile Include="Models\Interfaces\ILog.cs" />
     <Compile Include="Models\Interfaces\IModel.cs" />
     <Compile Include="Models\Interfaces\ICliente.cs" />
     <Compile Include="Models\Interfaces\IUnidade.cs" />
+    <Compile Include="Models\Interfaces\IUsuario.cs" />
     <Compile Include="Models\Unidade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -3,9 +3,8 @@ using WebApplication.Models.Enums;
 
 namespace WebApplication.Models.Interfaces
 {
-    public interface IClasseBase
+    public interface IModel : IIdentity
     {
-        int Id { get; }
         Status Status { get; }
     }
 }
