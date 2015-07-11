@@ -27,7 +27,7 @@ namespace WebApplication.Models
         /// <exception cref="MyException"></exception>
         public IList<IUnidade> Listar(ICliente model)
         {
-            base.ValidarModelo();
+            model.ValidarModelo();
 
             IDaoUnidade daoUnidade = new DaoUnidade();
             return daoUnidade.Listar(model);
