@@ -147,6 +147,10 @@
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Enums\Status.cs" />
     <Compile Include="Models\Exceptions\MyException.cs" />
+    <Compile Include="Models\Interfaces\Crud\IAlterar.cs" />
+    <Compile Include="Models\Interfaces\Crud\IConsultar.cs" />
+    <Compile Include="Models\Interfaces\Crud\IInativar.cs" />
+    <Compile Include="Models\Interfaces\Crud\IInserir.cs" />
     <Compile Include="Models\Interfaces\IIdentity.cs" />
     <Compile Include="Models\Interfaces\ILog.cs" />
     <Compile Include="Models\Interfaces\IModel.cs" />
