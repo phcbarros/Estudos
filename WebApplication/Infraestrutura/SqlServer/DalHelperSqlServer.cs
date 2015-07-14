@@ -11,7 +11,6 @@ namespace WebApplication.Infraestrutura.SqlServer
         #region Propriedades
         private SqlConnection Conexao { get; set; }
         private ICollection<SqlParameter> Parametros { get; set; }
-        public int UltimoIdInserido { get; private set; }
         #endregion
 
         #region Construtores
@@ -22,9 +21,10 @@ namespace WebApplication.Infraestrutura.SqlServer
         #endregion
 
         #region Criar Parâmetros e Comando
-        public void CriarParametro(string nome, SqlDbType tipo, object valor)
+        public void CriarParametro(string nome, SqlDbType tipo, object valor, ParameterDirection direction = ParameterDirection.Input)
         {
             var parametro = new SqlParameter(nome, tipo);
+            parametro.Direction = direction;
 
             if (valor == null)
             {
@@ -65,13 +65,6 @@ namespace WebApplication.Infraestrutura.SqlServer
                     {
                         retorno = comando.ExecuteNonQuery();
                         transacao.Commit();
-
-                        //var parameter = new SqlParameter("id", DBNull.Value);
-                        //parameter.Direction = ParameterDirection.Output;
-                        //comando.Parameters.Add(parameter);
-
-                        var lastInsertedId = this.ExecuteScalar("SELECT SCOPE_IDENTITY() AS LastInsertedId;");
-                        UltimoIdInserido = Convert.ToInt32(lastInsertedId);
                     }
                     catch (SqlException exception)
                     {

@@ -1,16 +1,13 @@
 ﻿using System;
-using WebApplication.Models.Interfaces.Crud;
-using WebApplication.Models.Interfaces.Persistencia;
+using WebApplication.Models.Enums;
 
 namespace WebApplication.Models.Interfaces.Logs
 {
-    public interface ILog : IIdentity, IInserir
+    public interface ILog
     {
         #region Propriedades
         IUsuario Usuario { get; }
-        string Operacao { get; }
-        string Ip { get; }
-        string Navegador { get; }
+        Operacao Operacao { get; }
         DateTime DataHora { get; }
         #endregion
     }

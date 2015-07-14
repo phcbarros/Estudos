@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using WebApplication.Dao;
 using WebApplication.Dao.Interfaces;
+using WebApplication.Dao.Interfaces.Logs;
+using WebApplication.Dao.Logs;
 using WebApplication.Models.Enums;
 using WebApplication.Models.Exceptions;
 using WebApplication.Models.Interfaces;
+using WebApplication.Models.Interfaces.Logs;
+using WebApplication.Models.Logs;
 
 namespace WebApplication.Models
 {
@@ -15,12 +19,14 @@ namespace WebApplication.Models
         public IList<IUnidade> Unidades { get; private set; }
 
         private static readonly IDaoCliente _daoCliente;
+        private static readonly IDaoClienteLog _daoClienteLog;
         #endregion
 
         #region Construtores
         static Cliente()
         {
             _daoCliente = new DaoCliente();
+            _daoClienteLog = new DaoClienteLog();
         }
         public Cliente(int id)
         {
@@ -74,7 +80,8 @@ namespace WebApplication.Models
             this.Status = Status.Ativo;
             this.Id = _daoCliente.Inserir(this);
 
-            //Criar Log por tabela
+            ILog log = new Log(Operacao.Inserir);
+            _daoClienteLog.Inserir(this, log);
         }
         #endregion
 

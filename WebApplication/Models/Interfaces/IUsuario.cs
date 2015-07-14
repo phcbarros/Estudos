@@ -9,7 +9,7 @@
         #endregion
 
         #region Recuperar Usuário Logado
-        IUsuario RecuperarUsuarioLogado();
+        void RecuperarUsuarioLogado();
         #endregion
 
         #region Validações

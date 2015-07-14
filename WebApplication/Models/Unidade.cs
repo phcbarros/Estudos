@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using WebApplication.Dao;
 using WebApplication.Dao.Interfaces;
+using WebApplication.Dao.Interfaces.Logs;
+using WebApplication.Dao.Logs;
 using WebApplication.Models.Enums;
 using WebApplication.Models.Exceptions;
 using WebApplication.Models.Interfaces;
@@ -15,12 +17,14 @@ namespace WebApplication.Models
         public ICliente Cliente { get; private set; }
 
         private static readonly IDaoUnidade _daoUnidade;
+        private static readonly IDaoUnidadeLog _daoUnidadeLog;
         #endregion
 
         #region Construtores
         static Unidade()
         {
             _daoUnidade = new DaoUnidade();
+            _daoUnidadeLog = new DaoUnidadeLog();
         }
         public Unidade()
         {

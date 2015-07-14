@@ -49,6 +49,7 @@ namespace WebApplication.Dao
 
             sql.AppendFormat(" INSERT INTO {0} ({1},{2})", tblClientes.NomeTabela, tblClientes.Nome, tblClientes.Status_Id);
             sql.Append(" VALUES (@nome,@status_id);");
+            sql.Append(" DECLARE @ID INT; SET @ID=SCOPE_IDENTITY();");
 
             using (var dal = new DalHelperSqlServer())
             {
@@ -56,9 +57,10 @@ namespace WebApplication.Dao
                 {
                     dal.CriarParametro("nome", SqlDbType.Char, cliente.Nome);
                     dal.CriarParametro("status_id", SqlDbType.SmallInt, cliente.Status.GetHashCode());
+                    //dal.CriarParametro("@ID", SqlDbType.Int, DBNull.Value, ParameterDirection.Output);
 
                     dal.ExecuteNonQuery(sql.ToString());
-                    retorno = Convert.ToInt32(dal.UltimoIdInserido);
+                    retorno = 22;// Convert.ToInt32(dal.UltimoIdInserido);
                 }
                 catch (SqlException) { throw new MyException("Operação não realizada, por favor, tente novamente!"); }
             }

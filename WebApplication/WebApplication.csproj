@@ -138,7 +138,9 @@
     <Compile Include="Dao\Interfaces\Crud\IInserirPartial.cs" />
     <Compile Include="Dao\Logs\DaoClienteLog.cs" />
     <Compile Include="Dao\Logs\DaoUnidadeLog.cs" />
+    <Compile Include="Dao\Tabelas\TblClientesLog.cs" />
     <Compile Include="Dao\Tabelas\TblClientes.cs" />
+    <Compile Include="Dao\Tabelas\TblUnidadesLog.cs" />
     <Compile Include="Dao\Tabelas\TblUnidades.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -147,6 +149,7 @@
     <Compile Include="Infraestrutura\SqlServer\DalHelperSqlServer.cs" />
     <Compile Include="Models\ClasseBase.cs" />
     <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\Enums\Operacao.cs" />
     <Compile Include="Models\Enums\Status.cs" />
     <Compile Include="Models\Exceptions\MyException.cs" />
     <Compile Include="Models\Interfaces\Crud\IAlterar.cs" />
@@ -159,7 +162,9 @@
     <Compile Include="Models\Interfaces\ICliente.cs" />
     <Compile Include="Models\Interfaces\IUnidade.cs" />
     <Compile Include="Models\Interfaces\IUsuario.cs" />
+    <Compile Include="Models\Logs\Log.cs" />
     <Compile Include="Models\Unidade.cs" />
+    <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -213,7 +218,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\Logs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
