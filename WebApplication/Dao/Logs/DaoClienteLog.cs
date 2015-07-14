@@ -28,12 +28,12 @@ namespace WebApplication.Dao.Logs
             {
                 try
                 {
-                    dal.CriarParametro("id", SqlDbType.Int, cliente.Id);
-                    dal.CriarParametro("nome", SqlDbType.Char, cliente.Nome);
-                    dal.CriarParametro("status_id", SqlDbType.SmallInt, cliente.Status.GetHashCode());
-                    dal.CriarParametro("usuarios_id", SqlDbType.Int, log.Usuario.Id);
-                    dal.CriarParametro("operacao_id", SqlDbType.SmallInt, log.Operacao.GetHashCode());
-                    dal.CriarParametro("datahora", SqlDbType.DateTime, log.DataHora);
+                    dal.CriarParametroDeEntrada("id", SqlDbType.Int, cliente.Id);
+                    dal.CriarParametroDeEntrada("nome", SqlDbType.Char, cliente.Nome);
+                    dal.CriarParametroDeEntrada("status_id", SqlDbType.SmallInt, cliente.Status.GetHashCode());
+                    dal.CriarParametroDeEntrada("usuarios_id", SqlDbType.Int, log.Usuario.Id);
+                    dal.CriarParametroDeEntrada("operacao_id", SqlDbType.SmallInt, log.Operacao.GetHashCode());
+                    dal.CriarParametroDeEntrada("datahora", SqlDbType.DateTime, log.DataHora);
 
                     dal.ExecuteNonQuery(sql.ToString());
                 }

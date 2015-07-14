@@ -21,7 +21,20 @@ namespace WebApplication.Infraestrutura.SqlServer
         #endregion
 
         #region Criar Parâmetros e Comando
-        public void CriarParametro(string nome, SqlDbType tipo, object valor, ParameterDirection direction = ParameterDirection.Input)
+        public void CriarParametroDeEntrada(string nome, SqlDbType tipo, object valor)
+        {
+            var parametro = this.CriarParametro(nome, tipo, valor);
+            Parametros.Add(parametro);
+        }
+
+        public SqlParameter CriarParametroDeSaida(string nome, SqlDbType tipo)
+        {
+            var parametro = this.CriarParametro(nome, tipo, DBNull.Value, ParameterDirection.Output);
+            Parametros.Add(parametro);
+            return parametro;
+        }
+
+        private SqlParameter CriarParametro(string nome, SqlDbType tipo, object valor, ParameterDirection direction = ParameterDirection.Input)
         {
             var parametro = new SqlParameter(nome, tipo);
             parametro.Direction = direction;
@@ -37,8 +50,9 @@ namespace WebApplication.Infraestrutura.SqlServer
 
             Parametros = Parametros ?? new List<SqlParameter>();
 
-            Parametros.Add(parametro);
+            return parametro;
         }
+
         private SqlCommand CriarComando(string sql)
         {
             var comando = new SqlCommand(sql, Conexao);

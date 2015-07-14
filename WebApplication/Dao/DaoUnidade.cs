@@ -65,7 +65,7 @@ namespace WebApplication.Dao
             {
                 try
                 {
-                    dal.CriarParametro("id", SqlDbType.Int, cliente.Id);
+                    dal.CriarParametroDeEntrada("id", SqlDbType.Int, cliente.Id);
                     using (var dr = dal.ExecuteReader(sql.ToString()))
                     {
                         while (dr.Read())

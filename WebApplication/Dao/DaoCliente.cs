@@ -49,18 +49,18 @@ namespace WebApplication.Dao
 
             sql.AppendFormat(" INSERT INTO {0} ({1},{2})", tblClientes.NomeTabela, tblClientes.Nome, tblClientes.Status_Id);
             sql.Append(" VALUES (@nome,@status_id);");
-            sql.Append(" DECLARE @ID INT; SET @ID=SCOPE_IDENTITY();");
+            sql.Append(" SET @id=SCOPE_IDENTITY();");
 
             using (var dal = new DalHelperSqlServer())
             {
                 try
                 {
-                    dal.CriarParametro("nome", SqlDbType.Char, cliente.Nome);
-                    dal.CriarParametro("status_id", SqlDbType.SmallInt, cliente.Status.GetHashCode());
-                    //dal.CriarParametro("@ID", SqlDbType.Int, DBNull.Value, ParameterDirection.Output);
+                    dal.CriarParametroDeEntrada("nome", SqlDbType.Char, cliente.Nome);
+                    dal.CriarParametroDeEntrada("status_id", SqlDbType.SmallInt, cliente.Status.GetHashCode());
+                    var parametroDeSaida = dal.CriarParametroDeSaida("id", SqlDbType.Int);
 
                     dal.ExecuteNonQuery(sql.ToString());
-                    retorno = 22;// Convert.ToInt32(dal.UltimoIdInserido);
+                    retorno = Convert.ToInt32(parametroDeSaida.Value);
                 }
                 catch (SqlException) { throw new MyException("Operação não realizada, por favor, tente novamente!"); }
             }
@@ -83,7 +83,7 @@ namespace WebApplication.Dao
             {
                 try
                 {
-                    dal.CriarParametro("nome", SqlDbType.Char, cliente.Nome);
+                    dal.CriarParametroDeEntrada("nome", SqlDbType.Char, cliente.Nome);
 
                     resultado = Convert.ToBoolean(dal.ExecuteScalar(sql.ToString()));//Null ou 0 (Zero) = False; > 0 (Zero) = True;
                 }
