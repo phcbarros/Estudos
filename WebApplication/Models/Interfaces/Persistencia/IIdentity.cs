@@ -1,4 +1,4 @@
-﻿namespace WebApplication.Models.Interfaces
+﻿namespace WebApplication.Models.Interfaces.Persistencia
 {
     public interface IIdentity
     {

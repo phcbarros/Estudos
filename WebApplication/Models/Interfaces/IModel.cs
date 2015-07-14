@@ -1,6 +1,7 @@
 ﻿using System;
 using WebApplication.Models.Enums;
 using WebApplication.Models.Interfaces.Crud;
+using WebApplication.Models.Interfaces.Persistencia;
 
 namespace WebApplication.Models.Interfaces
 {

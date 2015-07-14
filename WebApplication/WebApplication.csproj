@@ -151,8 +151,8 @@
     <Compile Include="Models\Interfaces\Crud\IConsultar.cs" />
     <Compile Include="Models\Interfaces\Crud\IInativar.cs" />
     <Compile Include="Models\Interfaces\Crud\IInserir.cs" />
-    <Compile Include="Models\Interfaces\IIdentity.cs" />
-    <Compile Include="Models\Interfaces\ILog.cs" />
+    <Compile Include="Models\Interfaces\Persistencia\IIdentity.cs" />
+    <Compile Include="Models\Interfaces\Logs\ILog.cs" />
     <Compile Include="Models\Interfaces\IModel.cs" />
     <Compile Include="Models\Interfaces\ICliente.cs" />
     <Compile Include="Models\Interfaces\IUnidade.cs" />
@@ -211,6 +211,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Dao\Logs\" />
+    <Folder Include="Models\Logs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

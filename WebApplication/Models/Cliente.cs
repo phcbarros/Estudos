@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using WebApplication.Dao;
 using WebApplication.Dao.Interfaces;
 using WebApplication.Models.Enums;
@@ -14,6 +12,12 @@ namespace WebApplication.Models
     {
         public string Nome { get; private set; }
         public IList<IUnidade> Unidades { get; private set; }
+
+        private static readonly IDaoCliente _daoCliente;
+        static Cliente()
+        {
+            _daoCliente = new DaoCliente();
+        }
         public Cliente(int id)
         {
             this.Id = id;
@@ -30,8 +34,7 @@ namespace WebApplication.Models
         }
         public IList<ICliente> Listar()
         {
-            IDaoCliente daoCliente = new DaoCliente();
-            return daoCliente.Listar();
+            return _daoCliente.Listar();
         }
         public void PreencherUnidades()
         {
@@ -59,13 +62,11 @@ namespace WebApplication.Models
         {
             ValidarNome();
 
-            IDaoCliente daoCliente = new DaoCliente();
-
             //if (daoCliente.ExisteNomenclaturaInformada(this))
             //    throw new MyException("Já existe o Nome informado!");
 
-            this.Status = Status.Ativo;          
-            this.Id = daoCliente.Inserir(this);
+            this.Status = Status.Ativo;
+            this.Id = _daoCliente.Inserir(this);
 
             //Criar Log por tabela
         }

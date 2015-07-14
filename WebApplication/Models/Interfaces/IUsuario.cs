@@ -1,6 +1,6 @@
 ﻿namespace WebApplication.Models.Interfaces
 {
-    public interface IUsuario
+    public interface IUsuario : IModel<IUsuario>
     {
         string Nome { get; }
         string Email { get; }

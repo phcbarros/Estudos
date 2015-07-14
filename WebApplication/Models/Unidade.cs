@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using WebApplication.Dao;
 using WebApplication.Dao.Interfaces;
 using WebApplication.Models.Enums;
@@ -14,6 +12,12 @@ namespace WebApplication.Models
     {
         public string Nome { get; private set; }
         public ICliente Cliente { get; private set; }
+
+        private static readonly IDaoUnidade _daoUnidade;
+        static Unidade()
+        {
+            _daoUnidade = new DaoUnidade();
+        }
         public Unidade()
         {
 
@@ -29,8 +33,7 @@ namespace WebApplication.Models
         {
             model.ValidarModelo();
 
-            IDaoUnidade daoUnidade = new DaoUnidade();
-            return daoUnidade.Listar(model);
+            return _daoUnidade.Listar(model);
         }
 
         public bool Alterar()
