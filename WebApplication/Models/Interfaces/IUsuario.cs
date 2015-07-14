@@ -2,11 +2,22 @@
 {
     public interface IUsuario : IModel<IUsuario>
     {
+        #region Propriedades
         string Nome { get; }
         string Email { get; }
         string Senha { get; }
+        #endregion
+
+        #region Recuperar Usuário Logado
         IUsuario RecuperarUsuarioLogado();
+        #endregion
+
+        #region Validações
         bool ValidarAcesso(out int usuarioId);
+        #endregion
+
+        #region Sair
         void LogOff();
+        #endregion
     }
 }

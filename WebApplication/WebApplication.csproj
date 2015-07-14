@@ -136,6 +136,8 @@
     <Compile Include="Dao\Interfaces\Logs\IDaoClienteLog.cs" />
     <Compile Include="Dao\Interfaces\Logs\IDaoUnidadeLog.cs" />
     <Compile Include="Dao\Interfaces\Crud\IInserirPartial.cs" />
+    <Compile Include="Dao\Logs\DaoClienteLog.cs" />
+    <Compile Include="Dao\Logs\DaoUnidadeLog.cs" />
     <Compile Include="Dao\Tabelas\TblClientes.cs" />
     <Compile Include="Dao\Tabelas\TblUnidades.cs" />
     <Compile Include="Global.asax.cs">
@@ -211,7 +213,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Dao\Logs\" />
     <Folder Include="Models\Logs\" />
   </ItemGroup>
   <ItemGroup>

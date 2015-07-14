@@ -8,13 +8,20 @@ namespace WebApplication.Infraestrutura.SqlServer
 {
     public sealed class DalHelperSqlServer : IDisposable
     {
+        #region Propriedades
         private SqlConnection Conexao { get; set; }
         private ICollection<SqlParameter> Parametros { get; set; }
         public int UltimoIdInserido { get; private set; }
+        #endregion
+
+        #region Construtores
         public DalHelperSqlServer()
         {
             Conexao = ConexaoSqlServer.GetConnection();
         }
+        #endregion
+
+        #region Criar Parâmetros
         public void CriarParametro(string nome, SqlDbType tipo, object valor)
         {
             var parametro = new SqlParameter(nome, tipo);
@@ -41,15 +48,18 @@ namespace WebApplication.Infraestrutura.SqlServer
             }
             return comando;
         }
+        #endregion
+
+        #region Alterar Inativar Inativar
         /// <exception cref="MySqlException"></exception>
         public int ExecuteNonQuery(string sql)
         {
             int retorno;
             using (var comando = CriarComando(sql))
             {
-                //var p = new SqlParameter("id", DBNull.Value);
-                //p.Direction = ParameterDirection.Output;
-                //comando.Parameters.Add(p);
+                //var parameter = new SqlParameter("id", DBNull.Value);
+                //parameter.Direction = ParameterDirection.Output;
+                //comando.Parameters.Add(parameter);
 
                 comando.Connection.Open();
                 using (var transacao = Conexao.BeginTransaction(IsolationLevel.Serializable))
@@ -77,6 +87,9 @@ namespace WebApplication.Infraestrutura.SqlServer
             }
             return retorno;
         }
+        #endregion
+
+        #region Consultar
         /// <exception cref="MySqlException"></exception>
         public object ExecuteScalar(string sql)
         {
@@ -88,6 +101,9 @@ namespace WebApplication.Infraestrutura.SqlServer
             }
             return objeto;
         }
+        #endregion
+
+        #region Consultar Listar
         /// <exception cref="MySqlException"></exception>
         public SqlDataReader ExecuteReader(string sql)
         {
@@ -99,11 +115,15 @@ namespace WebApplication.Infraestrutura.SqlServer
             }
             return dr;
         }
+        #endregion
+
+        #region Fechar Conexão
         /// <exception cref="MySqlException"></exception>
         public void Dispose()
         {
             Conexao.Close();
             Conexao.Dispose();
         }
+        #endregion
     }
 }

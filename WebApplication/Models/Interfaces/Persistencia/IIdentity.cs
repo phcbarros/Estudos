@@ -2,7 +2,12 @@
 {
     public interface IIdentity
     {
+        #region Propriedades
         int Id { get; }
-        void ValidarModelo();
+        #endregion
+
+        #region Validações
+        void ValidarId();
+        #endregion
     }
 }

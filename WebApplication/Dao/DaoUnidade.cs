@@ -15,7 +15,41 @@ namespace WebApplication.Dao
 {
     public sealed class DaoUnidade : IDaoUnidade
     {
-        public IList<IUnidade> Listar(ICliente model)
+        #region Alterar
+        /// <exception cref="MyException"></exception>
+        public bool Alterar(IUnidade unidade)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        #region Consultar
+        /// <exception cref="MyException"></exception>
+        public IUnidade Consultar(int id)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        #region Inativar
+        /// <exception cref="MyException"></exception>
+        public bool Inativar(IUnidade unidade)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        #region Inserir
+        /// <exception cref="MyException"></exception>
+        public int Inserir(IUnidade unidade)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        #region Listar
+        /// <exception cref="MyException"></exception>
+        public IList<IUnidade> Listar(ICliente cliente)
         {
             var lista = new List<IUnidade>();
             var sql = new StringBuilder();
@@ -31,7 +65,7 @@ namespace WebApplication.Dao
             {
                 try
                 {
-                    dal.CriarParametro("id", SqlDbType.Int, model.Id);
+                    dal.CriarParametro("id", SqlDbType.Int, cliente.Id);
                     using (var dr = dal.ExecuteReader(sql.ToString()))
                     {
                         while (dr.Read())
@@ -48,25 +82,6 @@ namespace WebApplication.Dao
 
             return lista;
         }
-
-        public bool Alterar(IUnidade model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IUnidade Consultar(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Inativar(IUnidade model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int Inserir(IUnidade model)
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
     }
 }

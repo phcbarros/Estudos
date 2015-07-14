@@ -15,68 +15,47 @@ namespace WebApplication.Dao
 {
     public sealed class DaoCliente : IDaoCliente
     {
-        public IList<ICliente> Listar()
-        {
-            var lista = new List<ICliente>();
-            var sql = new StringBuilder();
-            var tabela = new TblClientes();
-
-            sql.AppendFormat(" SELECT DISTINCT {0}, {1}", tabela.Id, tabela.Nome);
-            sql.AppendFormat(" FROM {0}", tabela.NomeTabela);
-            sql.AppendFormat(" WHERE {0}={1}", tabela.Status_Id, Status.Ativo.GetHashCode());
-            sql.AppendFormat(" ORDER BY {0};", tabela.Nome);
-
-            using (var dal = new DalHelperSqlServer())
-            {
-                try
-                {
-                    using (var dr = dal.ExecuteReader(sql.ToString()))
-                    {
-                        while (dr.Read())
-                        {
-                            lista.Add(new Cliente(
-                                dr.GetInt32(0),
-                                dr.GetString(1),
-                                Status.Ativo));
-                        }
-                    }
-                }
-                catch (SqlException) { throw new MyException("Operação não realizada, por favor, tente novamente!"); }
-            }
-
-            return lista;
-        }
-
-        public bool Alterar(ICliente model)
+        #region Alterar
+        /// <exception cref="MyException"></exception>
+        public bool Alterar(ICliente cliente)
         {
             throw new NotImplementedException();
         }
+        #endregion
 
+        #region Consultar
+        /// <exception cref="MyException"></exception>
         public ICliente Consultar(int id)
         {
             throw new NotImplementedException();
         }
+        #endregion
 
-        public bool Inativar(ICliente model)
+        #region Inativar
+        /// <exception cref="MyException"></exception>
+        public bool Inativar(ICliente cliente)
         {
             throw new NotImplementedException();
         }
+        #endregion
 
-        public int Inserir(ICliente model)
+        #region Inserir
+        /// <exception cref="MyException"></exception>
+        public int Inserir(ICliente cliente)
         {
             int retorno;
             var sql = new StringBuilder();
-            var tabela = new TblClientes();
+            var tblClientes = new TblClientes();
 
-            sql.AppendFormat(" INSERT INTO {0} ({1},{2})", tabela.NomeTabela, tabela.Nome, tabela.Status_Id);
+            sql.AppendFormat(" INSERT INTO {0} ({1},{2})", tblClientes.NomeTabela, tblClientes.Nome, tblClientes.Status_Id);
             sql.Append(" VALUES (@nome,@status_id);");
-            
+
             using (var dal = new DalHelperSqlServer())
             {
                 try
                 {
-                    dal.CriarParametro("nome", SqlDbType.Char, model.Nome);
-                    dal.CriarParametro("status_id", SqlDbType.SmallInt, model.Status.GetHashCode());
+                    dal.CriarParametro("nome", SqlDbType.Char, cliente.Nome);
+                    dal.CriarParametro("status_id", SqlDbType.SmallInt, cliente.Status.GetHashCode());
 
                     dal.ExecuteNonQuery(sql.ToString());
                     retorno = Convert.ToInt32(dal.UltimoIdInserido);
@@ -86,5 +65,67 @@ namespace WebApplication.Dao
 
             return retorno;
         }
+
+        /// <exception cref="MyException"></exception>
+        public bool ExisteNomenclaturaInformada(ICliente cliente)
+        {
+            bool resultado;
+            var sql = new StringBuilder();
+            var tblClientes = new TblClientes();
+
+            sql.AppendFormat(" SELECT {0}", tblClientes.Id);
+            sql.AppendFormat(" FROM {0}", tblClientes.NomeTabela);
+            sql.AppendFormat(" WHERE {0}=@nome;", tblClientes.Nome);
+
+            using (var dal = new DalHelperSqlServer())
+            {
+                try
+                {
+                    dal.CriarParametro("nome", SqlDbType.Char, cliente.Nome);
+
+                    resultado = Convert.ToBoolean(dal.ExecuteScalar(sql.ToString()));//Null ou 0 (Zero) = False; > 0 (Zero) = True;
+                }
+                catch (SqlException)
+                { throw new MyException("Operação não realizada, por favor, tente novamente!"); }
+            }
+
+            return resultado;
+        }
+        #endregion
+
+        #region Listar
+        /// <exception cref="MyException"></exception>
+        public IList<ICliente> Listar()
+        {
+            var clientes = new List<ICliente>();
+            var sql = new StringBuilder();
+            var tblClientes = new TblClientes();
+
+            sql.AppendFormat(" SELECT DISTINCT {0}, {1}", tblClientes.Id, tblClientes.Nome);
+            sql.AppendFormat(" FROM {0}", tblClientes.NomeTabela);
+            sql.AppendFormat(" WHERE {0}={1}", tblClientes.Status_Id, Status.Ativo.GetHashCode());
+            sql.AppendFormat(" ORDER BY {0};", tblClientes.Nome);
+
+            using (var dal = new DalHelperSqlServer())
+            {
+                try
+                {
+                    using (var dr = dal.ExecuteReader(sql.ToString()))
+                    {
+                        while (dr.Read())
+                        {
+                            clientes.Add(new Cliente(
+                                dr.GetInt32(0),
+                                dr.GetString(1),
+                                Status.Ativo));
+                        }
+                    }
+                }
+                catch (SqlException) { throw new MyException("Operação não realizada, por favor, tente novamente!"); }
+            }
+
+            return clientes;
+        }
+        #endregion
     }
 }

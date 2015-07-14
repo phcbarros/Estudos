@@ -10,10 +10,14 @@ namespace WebApplication.Models
 {
     public class Cliente : ClasseBase, ICliente
     {
+        #region Propriedades
         public string Nome { get; private set; }
         public IList<IUnidade> Unidades { get; private set; }
 
         private static readonly IDaoCliente _daoCliente;
+        #endregion
+
+        #region Construtores
         static Cliente()
         {
             _daoCliente = new DaoCliente();
@@ -32,44 +36,64 @@ namespace WebApplication.Models
             this.Nome = nome;
             this.Status = status;
         }
-        public IList<ICliente> Listar()
-        {
-            return _daoCliente.Listar();
-        }
-        public void PreencherUnidades()
-        {
-            IUnidade unidade = new Unidade();
-            this.Unidades = unidade.Listar(this);
-        }
+        #endregion
 
+        #region Alterar
+        /// <exception cref="MyException"></exception>
         public bool Alterar()
         {
             throw new NotImplementedException();
         }
+        #endregion
 
+        #region Consultar
+        /// <exception cref="MyException"></exception>
         public ICliente Consultar(int id)
         {
             throw new NotImplementedException();
         }
+        #endregion
 
+        #region Inativar
+        /// <exception cref="MyException"></exception>
         public bool Inativar()
         {
             throw new NotImplementedException();
         }
+        #endregion
 
+        #region Inserir
         /// <exception cref="MyException"></exception>
         public void Inserir()
         {
             ValidarNome();
 
-            //if (daoCliente.ExisteNomenclaturaInformada(this))
-            //    throw new MyException("Já existe o Nome informado!");
+            if (_daoCliente.ExisteNomenclaturaInformada(this))
+                throw new MyException("Já existe o Nome informado!");
 
             this.Status = Status.Ativo;
             this.Id = _daoCliente.Inserir(this);
 
             //Criar Log por tabela
         }
+        #endregion
+
+        #region Listar
+        /// <exception cref="MyException"></exception>
+        public IList<ICliente> Listar()
+        {
+            return _daoCliente.Listar();
+        }
+        #endregion
+
+        #region Preencher
+        /// <exception cref="MyException"></exception>
+        public void PreencherUnidades()
+        {
+            IUnidade unidade = new Unidade();
+            this.Unidades = unidade.Listar(this);
+        }
+        #endregion
 
         #region Validações
         /// <exception cref="MyException"></exception>

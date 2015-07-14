@@ -2,6 +2,8 @@
 {
     public interface IInativar
     {
+        #region Inativar
         bool Inativar();
+        #endregion
     }
 }

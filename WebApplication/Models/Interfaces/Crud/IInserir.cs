@@ -2,6 +2,8 @@
 {
     public interface IInserir
     {
+        #region Inserir
         void Inserir();
+        #endregion
     }
 }

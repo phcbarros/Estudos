@@ -1,5 +1,4 @@
-﻿using WebApplication.Models.Interfaces;
-using WebApplication.Models.Interfaces.Persistencia;
+﻿using WebApplication.Models.Interfaces.Persistencia;
 
 namespace WebApplication.Dao.Interfaces.Crud
 {
@@ -7,6 +6,8 @@ namespace WebApplication.Dao.Interfaces.Crud
         where T1 : class, IIdentity
         where T2 : class
     {
+        #region Inserir
         void Inserir(T1 model1, T2 model2);
+        #endregion
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using WebApplication.Models.Enums;
+﻿using WebApplication.Models.Enums;
 using WebApplication.Models.Exceptions;
 
 namespace WebApplication.Models
@@ -11,17 +10,9 @@ namespace WebApplication.Models
         public Status Status { get; protected set; }
         #endregion
 
-        #region Construtores
-        
-        #endregion
-
-        #region Métodos
-
-        #endregion
-
         #region Validações
         /// <exception cref="MyException"></exception>
-        public virtual void ValidarModelo()
+        public virtual void ValidarId()
         {
             if (this == null || this.Id <= 0)
                 throw new MyException("Id é obrigatório!");

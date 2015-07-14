@@ -10,10 +10,14 @@ namespace WebApplication.Models
 {
     public class Unidade : ClasseBase, IUnidade
     {
+        #region Propriedades
         public string Nome { get; private set; }
         public ICliente Cliente { get; private set; }
 
         private static readonly IDaoUnidade _daoUnidade;
+        #endregion
+
+        #region Construtores
         static Unidade()
         {
             _daoUnidade = new DaoUnidade();
@@ -28,32 +32,49 @@ namespace WebApplication.Models
             this.Nome = nome;
             this.Status = status;
         }
+        #endregion
+
+        #region Alterar
         /// <exception cref="MyException"></exception>
-        public IList<IUnidade> Listar(ICliente model)
-        {
-            model.ValidarModelo();
-
-            return _daoUnidade.Listar(model);
-        }
-
         public bool Alterar()
         {
             throw new NotImplementedException();
         }
+        #endregion
 
+        #region Consultar
+        /// <exception cref="MyException"></exception>
         public IUnidade Consultar(int id)
         {
             throw new NotImplementedException();
         }
+        #endregion
 
+        #region Inativar
+        /// <exception cref="MyException"></exception>
         public bool Inativar()
         {
             throw new NotImplementedException();
         }
+        #endregion
 
+        #region Inserir
+        /// <exception cref="MyException"></exception>
         public void Inserir()
         {
             throw new NotImplementedException();
         }
+        #endregion
+
+        #region Listar
+        /// <exception cref="MyException"></exception>
+        public IList<IUnidade> Listar(ICliente cliente)
+        {
+            cliente.ValidarId();
+
+            return _daoUnidade.Listar(cliente);
+        }
+        #endregion
+
     }
 }
