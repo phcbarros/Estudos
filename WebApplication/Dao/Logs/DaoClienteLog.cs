@@ -16,23 +16,23 @@ namespace WebApplication.Dao.Logs
         /// <exception cref="MyException"></exception>
         public void Inserir(ICliente cliente, ILog log)
         {
-            var sql = new StringBuilder();
-            var tblClientes = new TblClientes();
+            //var sql = new StringBuilder();
+            //var tblClientes = new TblClientes();
 
-            sql.AppendFormat(" INSERT INTO {0} ({1},{2})", tblClientes.NomeTabela, tblClientes.Nome, tblClientes.Status_Id);
-            sql.Append(" VALUES (@nome,@status_id);");
+            //sql.AppendFormat(" INSERT INTO {0} ({1},{2})", tblClientes.NomeTabela, tblClientes.Nome, tblClientes.Status_Id);
+            //sql.Append(" VALUES (@nome,@status_id);");
 
-            using (var dal = new DalHelperSqlServer())
-            {
-                try
-                {
-                    dal.CriarParametro("nome", SqlDbType.Char, cliente.Nome);
-                    dal.CriarParametro("status_id", SqlDbType.SmallInt, cliente.Status.GetHashCode());
+            //using (var dal = new DalHelperSqlServer())
+            //{
+            //    try
+            //    {
+            //        dal.CriarParametro("nome", SqlDbType.Char, cliente.Nome);
+            //        dal.CriarParametro("status_id", SqlDbType.SmallInt, cliente.Status.GetHashCode());
 
-                    dal.ExecuteNonQuery(sql.ToString());
-                }
-                catch (SqlException) { throw new MyException("Operação não realizada, por favor, tente novamente!"); }
-            }
+            //        dal.ExecuteNonQuery(sql.ToString());
+            //    }
+            //    catch (SqlException) { throw new MyException("Operação não realizada, por favor, tente novamente!"); }
+            //}
         }
         #endregion
     }

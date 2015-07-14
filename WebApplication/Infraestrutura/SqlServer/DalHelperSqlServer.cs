@@ -21,7 +21,7 @@ namespace WebApplication.Infraestrutura.SqlServer
         }
         #endregion
 
-        #region Criar Parâmetros
+        #region Criar Parâmetros e Comando
         public void CriarParametro(string nome, SqlDbType tipo, object valor)
         {
             var parametro = new SqlParameter(nome, tipo);
@@ -51,17 +51,13 @@ namespace WebApplication.Infraestrutura.SqlServer
         #endregion
 
         #region Alterar Inativar Inativar
-        /// <exception cref="MySqlException"></exception>
+        /// <exception cref="SqlException"></exception>
         public int ExecuteNonQuery(string sql)
         {
             int retorno;
             using (var comando = CriarComando(sql))
             {
-                //var parameter = new SqlParameter("id", DBNull.Value);
-                //parameter.Direction = ParameterDirection.Output;
-                //comando.Parameters.Add(parameter);
-
-                comando.Connection.Open();
+                AbrirConexao(comando);
                 using (var transacao = Conexao.BeginTransaction(IsolationLevel.Serializable))
                 {
                     comando.Transaction = transacao;
@@ -69,7 +65,13 @@ namespace WebApplication.Infraestrutura.SqlServer
                     {
                         retorno = comando.ExecuteNonQuery();
                         transacao.Commit();
-                        //UltimoIdInserido = Convert.ToInt32(this.ExecuteScalar("SELECT SCOPE_IDENTITY() AS LastInsertedId;"));
+
+                        //var parameter = new SqlParameter("id", DBNull.Value);
+                        //parameter.Direction = ParameterDirection.Output;
+                        //comando.Parameters.Add(parameter);
+
+                        var lastInsertedId = this.ExecuteScalar("SELECT SCOPE_IDENTITY() AS LastInsertedId;");
+                        UltimoIdInserido = Convert.ToInt32(lastInsertedId);
                     }
                     catch (SqlException exception)
                     {
@@ -90,13 +92,13 @@ namespace WebApplication.Infraestrutura.SqlServer
         #endregion
 
         #region Consultar
-        /// <exception cref="MySqlException"></exception>
+        /// <exception cref="SqlException"></exception>
         public object ExecuteScalar(string sql)
         {
             object objeto;
             using (var comando = CriarComando(sql))
             {
-                comando.Connection.Open();
+                AbrirConexao(comando);
                 objeto = comando.ExecuteScalar();
             }
             return objeto;
@@ -104,21 +106,30 @@ namespace WebApplication.Infraestrutura.SqlServer
         #endregion
 
         #region Consultar Listar
-        /// <exception cref="MySqlException"></exception>
+        /// <exception cref="SqlException"></exception>
         public SqlDataReader ExecuteReader(string sql)
         {
             SqlDataReader dr;
             using (var comando = CriarComando(sql))
             {
-                comando.Connection.Open();
+                AbrirConexao(comando);
                 dr = comando.ExecuteReader(CommandBehavior.CloseConnection);
             }
             return dr;
         }
         #endregion
 
-        #region Fechar Conexão
-        /// <exception cref="MySqlException"></exception>
+        #region Abrir e Fechar Conexão
+        /// <exception cref="SqlException"></exception>
+        private void AbrirConexao(SqlCommand comando)
+        {
+            if (comando.Connection.State != ConnectionState.Open)
+            {
+                comando.Connection.Open();
+            }
+        }
+
+        /// <exception cref="SqlException"></exception>
         public void Dispose()
         {
             Conexao.Close();
