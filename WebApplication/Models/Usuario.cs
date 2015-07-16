@@ -28,6 +28,7 @@ namespace WebApplication.Models
         public bool ValidarAcesso(out int usuarioId)
         {
             throw new NotImplementedException();
+            //Gravar Ip e Navegador, tabela LogOn (Igual tabela Log)
         }
 
         public void LogOff()

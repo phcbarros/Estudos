@@ -49,38 +49,40 @@ namespace WebApplication.Dao
 
         #region Listar
         /// <exception cref="MyException"></exception>
-        public IList<IUnidade> Listar(ICliente cliente)
+        public IList<IUnidade> Listar(ICliente cliente, Status status)
         {
-            var lista = new List<IUnidade>();
+            var unidades = new List<IUnidade>();
             var sql = new StringBuilder();
-            var tabela = new TblUnidades();
+            var tblUnidades = new TblUnidades();
 
-            sql.AppendFormat(" SELECT DISTINCT {0}, {1}", tabela.Id, tabela.Nome);
-            sql.AppendFormat(" FROM {0}", tabela.NomeTabela);
-            sql.AppendFormat(" WHERE {0}=@id", tabela.Clientes_Id);
-            sql.AppendFormat(" AND {0}={1}", tabela.Status_Id, Status.Ativo.GetHashCode());
-            sql.AppendFormat(" ORDER BY {0};", tabela.Nome);
+            sql.AppendFormat(" SELECT DISTINCT {0}, {1}, {2}", tblUnidades.Id, tblUnidades.Nome, tblUnidades.Status_Id);
+            sql.AppendFormat(" FROM {0}", tblUnidades.NomeTabela);
+            sql.AppendFormat(" WHERE {0}=@id", tblUnidades.Clientes_Id);
+            sql.AppendFormat(" AND {0}=@status_id", tblUnidades.Status_Id);
+            sql.AppendFormat(" ORDER BY {0};", tblUnidades.Nome);
 
             using (var dal = new DalHelperSqlServer())
             {
                 try
                 {
                     dal.CriarParametroDeEntrada("id", SqlDbType.Int, cliente.Id);
+                    dal.CriarParametroDeEntrada("status_id", SqlDbType.SmallInt, status.GetHashCode());
+
                     using (var dr = dal.ExecuteReader(sql.ToString()))
                     {
                         while (dr.Read())
                         {
-                            lista.Add(new Unidade(
+                            unidades.Add(new Unidade(
                                 dr.GetInt32(0),
                                 dr.GetString(1),
-                                Status.Ativo));
+                                (Status)dr.GetInt16(2)));
                         }
                     }
                 }
                 catch (SqlException) { throw new MyException("Operação não realizada, por favor, tente novamente!"); }
             }
 
-            return lista;
+            return unidades;
         }
         #endregion
     }

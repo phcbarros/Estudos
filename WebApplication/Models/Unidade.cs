@@ -76,7 +76,7 @@ namespace WebApplication.Models
         {
             cliente.ValidarId();
 
-            return _daoUnidade.Listar(cliente);
+            return _daoUnidade.Listar(cliente, Status.Ativo);
         }
         #endregion
 

@@ -48,6 +48,8 @@ namespace WebApplication.Models
         /// <exception cref="MyException"></exception>
         public bool Alterar()
         {
+            base.ValidarId();
+            this.ValidarNome();
             throw new NotImplementedException();
         }
         #endregion
@@ -56,6 +58,7 @@ namespace WebApplication.Models
         /// <exception cref="MyException"></exception>
         public ICliente Consultar(int id)
         {
+            base.ValidarId();
             throw new NotImplementedException();
         }
         #endregion
@@ -64,6 +67,7 @@ namespace WebApplication.Models
         /// <exception cref="MyException"></exception>
         public bool Inativar()
         {
+            base.ValidarId();
             throw new NotImplementedException();
         }
         #endregion
@@ -72,7 +76,7 @@ namespace WebApplication.Models
         /// <exception cref="MyException"></exception>
         public void Inserir()
         {
-            ValidarNome();
+            this.ValidarNome();
 
             if (_daoCliente.ExisteNomenclaturaInformada(this))
                 throw new MyException("Já existe o Nome informado!");
@@ -89,7 +93,7 @@ namespace WebApplication.Models
         /// <exception cref="MyException"></exception>
         public IList<ICliente> Listar()
         {
-            return _daoCliente.Listar();
+            return _daoCliente.Listar(Status.Ativo);
         }
         #endregion
 

@@ -97,21 +97,23 @@ namespace WebApplication.Dao
 
         #region Listar
         /// <exception cref="MyException"></exception>
-        public IList<ICliente> Listar()
+        public IList<ICliente> Listar(Status status)
         {
             var clientes = new List<ICliente>();
             var sql = new StringBuilder();
             var tblClientes = new TblClientes();
 
-            sql.AppendFormat(" SELECT DISTINCT {0}, {1}", tblClientes.Id, tblClientes.Nome);
+            sql.AppendFormat(" SELECT DISTINCT {0}, {1}, {2}", tblClientes.Id, tblClientes.Nome, tblClientes.Status_Id);
             sql.AppendFormat(" FROM {0}", tblClientes.NomeTabela);
-            sql.AppendFormat(" WHERE {0}={1}", tblClientes.Status_Id, Status.Ativo.GetHashCode());
+            sql.AppendFormat(" WHERE {0}=@status_id", tblClientes.Status_Id);
             sql.AppendFormat(" ORDER BY {0};", tblClientes.Nome);
 
             using (var dal = new DalHelperSqlServer())
             {
                 try
                 {
+                    dal.CriarParametroDeEntrada("status_id", SqlDbType.SmallInt, status.GetHashCode());
+
                     using (var dr = dal.ExecuteReader(sql.ToString()))
                     {
                         while (dr.Read())
@@ -119,7 +121,7 @@ namespace WebApplication.Dao
                             clientes.Add(new Cliente(
                                 dr.GetInt32(0),
                                 dr.GetString(1),
-                                Status.Ativo));
+                                (Status)dr.GetInt16(2)));
                         }
                     }
                 }
